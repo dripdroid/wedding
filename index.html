@@ -28,6 +28,7 @@
     /* Envelope container */
     .envelope-container {
       width: 450px; height: 300px; position: relative; perspective: 800px; cursor: pointer;
+      max-width: 90vw; max-height: 60vh;
     }
 
     .envelope-body {
@@ -94,6 +95,27 @@
       margin-top:10px;
       font-size:16px;
       color:var(--text);
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      h1{font-size:36px;}
+      p{font-size:16px;}
+      #countdown{font-size:48px;}
+      .envelope-flap{font-size:22px;}
+      .wax-seal{width:50px;height:50px;font-size:14px;}
+      #qrCode{width:120px;height:120px;}
+      #qrText{font-size:14px;}
+    }
+
+    @media (max-width: 480px) {
+      h1{font-size:28px;}
+      p{font-size:14px;}
+      #countdown{font-size:36px;}
+      .envelope-flap{font-size:18px;}
+      .wax-seal{width:40px;height:40px;font-size:12px;}
+      #qrCode{width:100px;height:100px;}
+      #qrText{font-size:12px;}
     }
   </style>
 </head>
