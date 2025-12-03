@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Areeb & Barsha — Wedding</title>
+
+  <style>
+    :root {
+      --bg: #fdfaf6;
+      --text: #222;
+      --accent: #c1a185;
+      --font-serif: 'OFL Font', Georgia, serif;
+      --font-sans: system-ui, -apple-system, 'Segoe UI', sans-serif;
+    }
+
+    *{box-sizing:border-box;margin:0;padding:0;}
+    html, body{font-family: var(--font-sans); background: var(--bg); color: var(--text); overflow-x:hidden; height:100%;}
+
+    /* Envelope Intro */
+    #envelopeIntro {
+      position: fixed;
+      top:0; left:0; width:100%; height:100%; display:flex; align-items:center; justify-content:center;
+      background: var(--bg); z-index:1000; transition: all 1s ease; flex-direction: column;
+    }
+    #envelopeIntro.hidden {opacity:0; pointer-events:none;}
+
+    /* Envelope container */
+    .envelope-container {
+      width: 450px; height: 300px; position: relative; perspective: 800px; cursor: pointer;
+    }
+
+    .envelope-body {
+      width: 100%; height: 100%; background: #f5f1ed; border-radius: 16px; box-shadow: 0 10px 25px rgba(0,0,0,0.2); position: relative; overflow: hidden;
+    }
+
+    .envelope-flap {
+      width: 100%; height: 50%; background: linear-gradient(145deg, #eae3d9 0%, #f5f1ed 100%);
+      position: absolute; top:0; left:0; transform-origin: top center;
+      border-bottom-left-radius: 16px; border-bottom-right-radius: 16px;
+      display:flex; align-items:center; justify-content:center;
+      font-family: var(--font-serif); font-size: 28px; color: var(--accent);
+      text-shadow: 0 1px 2px rgba(0,0,0,0.2);
+      transition: transform 1s ease;
+    }
+    .envelope-flap.open { transform: rotateX(-180deg); }
+    .envelope-container:hover .envelope-flap { transform: rotateX(-5deg); }
+
+    .wax-seal {
+      position: absolute;
+      bottom: -15px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 70px; height: 70px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 30% 30%, #b34d35 0%, #7f3222 60%, #5c2317 100%);
+      box-shadow: inset -2px -2px 6px rgba(255,255,255,0.2), 0 4px 12px rgba(0,0,0,0.4);
+      display:flex; align-items:center; justify-content:center;
+      font-family: var(--font-serif);
+      font-size: 18px; font-weight: bold;
+      color: #ffe6d0; text-shadow: 0 1px 2px rgba(0,0,0,0.6);
+      border: 2px solid rgba(0,0,0,0.1);
+      transform-style: preserve-3d;
+      pointer-events: none;
+      clip-path: polygon(50% 0%, 95% 15%, 100% 50%, 95% 85%, 50% 100%, 5% 85%, 0% 50%, 5% 15%);
+    }
+
+    /* Main container */
+    .container{
+      display:flex; flex-direction:column; align-items:center; justify-content:center;
+      text-align:center;
+      width:100%; height:100%; padding:24px;
+      opacity:0; transition: opacity 1s ease;
+    }
+    .container.visible{opacity:1;}
+
+    h1{font-family: var(--font-serif); font-size: 48px; margin-bottom:20px; color: var(--accent);}
+    p{font-size:20px; margin-bottom:10px; color:var(--text);}
+    #countdown{font-size:64px; font-family: var(--font-serif); margin-top:30px; color: var(--accent);}
+
+    /* QR Code styling */
+    #qrCode {
+      margin-top:30px;
+      width:150px; height:150px;
+      border-radius:12px;
+      cursor:pointer;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    #qrCode:hover {
+      transform: scale(1.05);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+    }
+    #qrText {
+      margin-top:10px;
+      font-size:16px;
+      color:var(--text);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Envelope Intro -->
+  <div id="envelopeIntro">
+    <div class="envelope-container" id="envelopeContainer">
+      <div class="envelope-body"></div>
+      <div class="envelope-flap" id="envelopeFlap">You’re Invited
+        <div class="wax-seal">A + B</div>
+      </div>
+    </div>
+    <p style="margin-top:20px;color:var(--text);">Click the envelope to open</p>
+  </div>
+
+  <!-- Main Countdown Content -->
+  <div class="container" id="mainContent">
+    <h1>You Are Invited!</h1>
+    <p>To the wedding of</p>
+    <h1>Areeb & Barsha</h1>
+    <p>Start Time: 8:00 PM</p>
+    <p>Venue: All Community Club</p>
+    <p>Location: House # 02 Rd 137, Dhaka 1212, Bangladesh</p>
+    <div id="countdown"></div>
+    <img id="qrCode" src="img/imageedit_0_6460315586-removebg-preview.png" alt="QR Code" onclick="window.open('','_blank')" />
+    <div id="qrText">Scan the QR code to share your photos from the wedding!</div>
+  </div>
+
+  <script>
+    // Envelope open effect
+    const envelopeContainer = document.getElementById('envelopeContainer');
+    const envelopeFlap = document.getElementById('envelopeFlap');
+    const intro = document.getElementById('envelopeIntro');
+    const main = document.getElementById('mainContent');
+
+    envelopeContainer.addEventListener('click', () => {
+      envelopeFlap.classList.add('open');
+      setTimeout(()=>{
+        intro.classList.add('hidden');
+        main.classList.add('visible');
+      }, 1000);
+    });
+
+    // Countdown Timer
+    const countdownEl = document.getElementById('countdown');
+    const weddingDate = new Date('January 6, 2026 20:00:00').getTime();
+
+    function updateCountdown(){
+      const now = new Date().getTime();
+      const distance = weddingDate - now;
+
+      if(distance < 0){
+        countdownEl.innerHTML = "The wedding has started!";
+        clearInterval(timer);
+        return;
+      }
+
+      const days = Math.floor(distance / (1000*60*60*24));
+      const hours = Math.floor((distance % (1000*60*60*24)) / (1000*60*60));
+      const minutes = Math.floor((distance % (1000*60*60)) / (1000*60));
+      const seconds = Math.floor((distance % (1000*60)) / 1000);
+
+      countdownEl.innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+    }
+
+    const timer = setInterval(updateCountdown, 1000);
+    updateCountdown();
+  </script>
+</body>
+</html>
