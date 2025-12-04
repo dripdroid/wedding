@@ -47,23 +47,16 @@
     .envelope-flap.open { transform: rotateX(-180deg); }
     .envelope-container:hover .envelope-flap { transform: rotateX(-5deg); }
 
-    .wax-seal {
+    /* Wax Seal Image */
+    .wax-seal-img {
       position: absolute;
-      bottom: -15px;
+      bottom: -35px;   /* lowered for proper placement */
       left: 50%;
       transform: translateX(-50%);
-      width: 70px; height: 70px;
-      border-radius: 50%;
-      background: radial-gradient(circle at 30% 30%, #b34d35 0%, #7f3222 60%, #5c2317 100%);
-      box-shadow: inset -2px -2px 6px rgba(255,255,255,0.2), 0 4px 12px rgba(0,0,0,0.4);
-      display:flex; align-items:center; justify-content:center;
-      font-family: var(--font-serif);
-      font-size: 18px; font-weight: bold;
-      color: #ffe6d0; text-shadow: 0 1px 2px rgba(0,0,0,0.6);
-      border: 2px solid rgba(0,0,0,0.1);
-      transform-style: preserve-3d;
+      width: 70px;
+      height: 70px;
+      object-fit: contain;
       pointer-events: none;
-      clip-path: polygon(50% 0%, 95% 15%, 100% 50%, 95% 85%, 50% 100%, 5% 85%, 0% 50%, 5% 15%);
     }
 
     /* Main container */
@@ -103,7 +96,7 @@
       p{font-size:16px;}
       #countdown{font-size:48px;}
       .envelope-flap{font-size:22px;}
-      .wax-seal{width:50px;height:50px;font-size:14px;}
+      .wax-seal-img{width:50px;height:50px; bottom:-25px;}
       #qrCode{width:120px;height:120px;}
       #qrText{font-size:14px;}
     }
@@ -113,7 +106,7 @@
       p{font-size:14px;}
       #countdown{font-size:36px;}
       .envelope-flap{font-size:18px;}
-      .wax-seal{width:40px;height:40px;font-size:12px;}
+      .wax-seal-img{width:50px;height:50px; bottom:-20px;} /* slightly bigger on phone */
       #qrCode{width:100px;height:100px;}
       #qrText{font-size:12px;}
     }
@@ -125,8 +118,9 @@
   <div id="envelopeIntro">
     <div class="envelope-container" id="envelopeContainer">
       <div class="envelope-body"></div>
-      <div class="envelope-flap" id="envelopeFlap">You’re Invited
-        <div class="wax-seal">A + B</div>
+      <div class="envelope-flap" id="envelopeFlap">
+        You’re Invited
+        <img class="wax-seal-img" src="img/imageedit_5_8088648696.png" alt="Wax Seal" />
       </div>
     </div>
     <p style="margin-top:20px;color:var(--text);">Click the envelope to open</p>
